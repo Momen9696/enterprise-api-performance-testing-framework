@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>PerfKit report ci-smoke</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; margin: 2rem; color: #14202b; background: #f6f8f7; }
+    h1 { margin-bottom: 0.2rem; }
+    .meta { color: #445; }
+    .verdict { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 700; }
+    .PASS { background: #d8f3df; color: #0d5c2e; }
+    .FAIL { background: #fde2e1; color: #8a1c13; }
+    .NOT_EVALUATED, .ERROR { background: #eee; color: #333; }
+    table { border-collapse: collapse; width: 100%; background: white; margin: 1rem 0 2rem; }
+    th, td { border: 1px solid #d5ddd8; padding: 0.45rem 0.6rem; text-align: left; font-size: 0.92rem; }
+    th { background: #e7f2ec; }
+    .note { background: #fff; border-left: 4px solid #1f7a4d; padding: 0.8rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>ci-smoke</h1>
+  <p class="meta">
+    load · http://127.0.0.1:8090<br/>
+    2026-11-24T17:22:34+00:00 → 2026-11-24T17:22:42+00:00
+    · measured duration 8.07s
+    · <span class="verdict PASS">PASS</span>
+  </p>
+  <div class="note">
+    <strong>Measured values.</strong>
+    Response times and throughput come from this Locust execution (run 9a3684c52e5b4973be36ae530a2370a6).
+    The local demo API does not add artificial latency unless a request sets <code>X-Demo-Latency-Ms</code>.
+    Bundled profiles do not set that header. Thresholds below are the ones stored on this profile, not a universal SLO.
+  </div>
+  <h2>Run metrics</h2>
+  <table><thead><tr><th>Total</th><th>Success</th><th>Failed</th><th>RPS</th><th>Avg ms</th><th>Min</th><th>Max</th><th>P50</th><th>P90</th><th>P95</th><th>P99</th><th>Error %</th></tr></thead><tbody><tr><td>181</td><td>181</td><td>0</td><td>22.42</td><td>4.60</td><td>1.43</td><td>11.26</td><td>4.47</td><td>7.00</td><td>8.03</td><td>10.33</td><td>0.00</td></tr></tbody></table>
+  <h2>Threshold assessment</h2>
+  <table><thead><tr><th>Metric</th><th>Operator</th><th>Limit</th><th>Actual</th><th>Result</th></tr></thead><tbody><tr><td>p95_ms</td><td>&lt;=</td><td>1000.00</td><td>8.03</td><td>PASS</td></tr><tr><td>p99_ms</td><td>&lt;=</td><td>2000.00</td><td>10.33</td><td>PASS</td></tr><tr><td>rps</td><td>&gt;=</td><td>1.00</td><td>22.42</td><td>PASS</td></tr><tr><td>error_pct</td><td>&lt;=</td><td>2.00</td><td>0.00</td><td>PASS</td></tr></tbody></table>
+  <h2>Endpoints</h2>
+  <table><thead><tr><th>Method</th><th>Name</th><th>Total</th><th>Failed</th><th>RPS</th><th>Avg</th><th>P50</th><th>P95</th><th>P99</th><th>Error %</th></tr></thead><tbody><tr><td>POST</td><td>auth_token</td><td>3</td><td>0</td><td>0.37</td><td>3.30</td><td>3.28</td><td>4.28</td><td>4.37</td><td>0.00</td></tr><tr><td>POST</td><td>create_transaction</td><td>11</td><td>0</td><td>1.36</td><td>4.78</td><td>4.81</td><td>7.37</td><td>7.91</td><td>0.00</td></tr><tr><td>GET</td><td>get_user</td><td>19</td><td>0</td><td>2.35</td><td>3.81</td><td>3.74</td><td>6.51</td><td>6.96</td><td>0.00</td></tr><tr><td>GET</td><td>list_accounts</td><td>27</td><td>0</td><td>3.34</td><td>5.25</td><td>4.95</td><td>9.74</td><td>10.48</td><td>0.00</td></tr><tr><td>GET</td><td>list_transactions</td><td>50</td><td>0</td><td>6.19</td><td>4.80</td><td>4.93</td><td>9.26</td><td>10.71</td><td>0.00</td></tr><tr><td>GET</td><td>list_users</td><td>51</td><td>0</td><td>6.32</td><td>4.39</td><td>4.35</td><td>7.30</td><td>8.41</td><td>0.00</td></tr><tr><td>GET</td><td>search</td><td>20</td><td>0</td><td>2.48</td><td>4.57</td><td>4.70</td><td>6.87</td><td>7.10</td><td>0.00</td></tr></tbody></table>
+  <h2>Error categories</h2>
+  <p>No failed requests.</p>
+  <h2>Charts</h2>
+  <div style="height:360px; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="981c53cb-fd0b-42e9-adc5-8c6668276efc" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("981c53cb-fd0b-42e9-adc5-8c6668276efc")) {                    Plotly.newPlot(                        "981c53cb-fd0b-42e9-adc5-8c6668276efc",                        [{"mode":"lines+markers","name":"Requests \u002f s","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0],"y":[27.0,19.0,25.0,22.0,21.0,25.0,22.0,20.0],"type":"scatter"},{"mode":"lines+markers","name":"Avg response ms","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0],"y":[4.810203702719365,3.900267422738436,3.7188800395233557,3.421668636623177,5.784013858092727,4.713018321199343,5.236287861903706,5.265939550008625],"yaxis":"y2","type":"scatter"}],                        {"height":360,"legend":{"orientation":"h"},"margin":{"b":48,"l":48,"r":24,"t":48},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"Throughput and average response time"},"xaxis":{"title":{"text":"Seconds from first sample"}},"yaxis":{"title":{"text":"Requests \u002f s"}},"yaxis2":{"overlaying":"y","side":"right","title":{"text":"Average ms"}}},                        {"responsive": true}                    )                };            </script>        </div><div style="height:360px; width:100%;">                            <div id="b678a6a9-40d4-44a5-9a2c-59986be427b9" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("b678a6a9-40d4-44a5-9a2c-59986be427b9")) {                    Plotly.newPlot(                        "b678a6a9-40d4-44a5-9a2c-59986be427b9",                        [{"name":"Error %","x":[0.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0],"y":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"type":"bar"}],                        {"height":360,"margin":{"b":48,"l":48,"r":24,"t":48},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"Error percentage by second"},"xaxis":{"title":{"text":"Seconds from first sample"}},"yaxis":{"title":{"text":"Error %"}}},                        {"responsive": true}                    )                };            </script>        </div><div style="height:360px; width:100%;">                            <div id="369d758d-1742-40b6-a70f-c142eeef6ac7" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("369d758d-1742-40b6-a70f-c142eeef6ac7")) {                    Plotly.newPlot(                        "369d758d-1742-40b6-a70f-c142eeef6ac7",                        [{"name":"P50","x":["auth_token","create_transaction","get_user","list_accounts","list_transactions","list_users","search"],"y":[3.2776669977465644,4.81150000996422,3.741416003322229,4.953875002684072,4.93187549727736,4.352667005150579,4.695250005170237],"type":"bar"},{"name":"P95","x":["auth_token","create_transaction","get_user","list_accounts","list_transactions","list_users","search"],"y":[4.2848795055761,7.367604492173996,6.505662501149343,9.740620400407352,9.256168897263702,7.302978992811404,6.867356242582901],"type":"bar"},{"name":"P99","x":["auth_token","create_transaction","get_user","list_accounts","list_transactions","list_users","search"],"y":[4.374409506272059,7.913088092755061,6.960432495980058,10.48202266334556,10.706335258873876,8.414583498961292,7.098871246998897],"type":"bar"}],                        {"barmode":"group","height":360,"margin":{"b":48,"l":48,"r":24,"t":48},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"Endpoint response-time comparison"},"xaxis":{"title":{"text":"Endpoint"}},"yaxis":{"title":{"text":"Milliseconds"}}},                        {"responsive": true}                    )                };            </script>        </div><div style="height:360px; width:100%;">                            <div id="a7d713a8-8ddc-461b-b46c-828b048fcdbe" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a7d713a8-8ddc-461b-b46c-828b048fcdbe")) {                    Plotly.newPlot(                        "a7d713a8-8ddc-461b-b46c-828b048fcdbe",                        [{"name":"Response time","nbinsx":30,"x":[2.212125007645227,4.396792006446049,3.2776669977465644,2.2351249936036766,2.0911250030621886,1.9770409999182448,1.6771669907029718,1.6928340046433732,3.2702919997973368,2.440917000058107,5.83208299940452,5.472999997437,6.019790991558693,2.963292005006224,3.0494160018861294,4.7350839886348695,6.166916995425709,7.103290990926325,5.567166997934692,5.845749998115934,10.127165995072573,10.555917004239745,11.262792002526112,6.6837080084951594,4.590249998727813,4.312374992878176,4.316416001529433,4.352667005150579,5.663875010213815,4.36962500680238,8.027541989577003,8.801625008345582,5.070582992630079,3.741416003322229,4.018999999971129,1.979916007257998,2.138291994924657,2.7900830027647316,1.636750006582588,1.7458329966757447,1.8616669985931367,2.347875008126721,5.267291009658948,3.8854159938637167,2.7409169997554272,3.664707997813821,5.176582999411039,4.291375007596798,6.365249995724298,4.866584000410512,4.306165996240452,6.482458993559703,5.2800830017076805,7.454124992364086,6.571708989213221,5.165042006410658,3.006708007887937,2.7948340139118955,2.5141669902950525,2.4775000056251884,2.3693330003879964,3.141583001706749,2.481667004758492,2.4337079958058894,2.4147919903043658,2.612500000395812,2.5031249970197678,1.5473329985979944,2.6765829970827326,2.0832500013057142,1.9555420003598556,4.889207993983291,4.2246249940944836,4.422124999109656,2.412500005448237,1.599625000380911,3.9939999987836927,3.130915996734984,6.195291003677994,5.309375002980232,6.142625003121793,2.6392090076114982,2.164167002774775,1.7187920020660385,2.0267920044716448,1.4340420020744205,2.32566699560266,4.012207995401695,3.5344170028110966,2.6218749990221113,2.2512919967994094,4.180917007033713,4.047041991725564,8.501415999489836,7.156749998102896,4.1562080004950985,6.818625013693236,5.509709008038044,4.493415995966643,4.108333014301024,5.685083000571467,4.189667000900954,5.794707991299219,4.46795899188146,6.208874998264946,4.997166994144209,8.049458992900327,6.132499998784624,5.112708007800393,2.5822080060606822,7.1166670095408335,6.753624998964369,7.151832993258722,6.477375005488284,6.442500001867302,5.6328329956159,2.4754580081207678,4.709375003585592,4.628916998626664,5.106374999741092,3.927416997612454,2.6538750098552555,6.835874999524094,5.283582999254577,4.584499998600222,7.074124994687736,3.646833007223904,5.212167001445778,4.348250004113652,6.685749991447665,9.935875001247041,10.271708000800572,2.8603329992620274,2.507915996829979,2.0290840038796887,1.571625005453825,2.668291999725625,2.778125010081567,3.954667001380585,4.385916996398009,4.366291992482729,3.4597080084495246,6.685875006951392,5.56779200269375,4.543957998976111,5.232625000644475,4.953875002684072,6.487916994956322,3.8495830085594207,5.786875000922009,3.71633299801033,2.9622500005643815,5.537165998248383,8.425416992395185,5.5550839897478,4.481666997889988,5.856082992977463,4.814832995180041,6.189957988681272,5.858124990481883,6.481000003986992,4.81150000996422,5.336082991561852,4.492167005082592,6.08500000089407,4.204040989861824,5.024416008382104,5.508791989996098,5.20833300834056,3.7085830117575824,5.334499990567565,5.074084008811042,6.852124992292374,7.205249989056028,5.611167012830265,4.102499995497055,5.329708990757354,7.000500001595356,7.438250002451241,2.9084999987389892,4.083291001734324],"type":"histogram"}],                        {"height":360,"margin":{"b":48,"l":48,"r":24,"t":48},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"title":{"text":"Response-time distribution"},"xaxis":{"title":{"text":"Milliseconds"}},"yaxis":{"title":{"text":"Requests"}}},                        {"responsive": true}                    )                };            </script>        </div>
+  <h2>Machine-readable summary</h2>
+  <pre>{
+  &quot;id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+  &quot;name&quot;: &quot;ci-smoke&quot;,
+  &quot;test_type&quot;: &quot;load&quot;,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;verdict&quot;: &quot;PASS&quot;,
+  &quot;base_url&quot;: &quot;http://127.0.0.1:8090&quot;,
+  &quot;started_at&quot;: &quot;2026-11-24T17:22:34+00:00&quot;,
+  &quot;finished_at&quot;: &quot;2026-11-24T17:22:42+00:00&quot;,
+  &quot;duration_seconds&quot;: 8.073369026184082,
+  &quot;metrics&quot;: {
+    &quot;total&quot;: 181,
+    &quot;successful&quot;: 181,
+    &quot;failed&quot;: 0,
+    &quot;rps&quot;: 22.419388908517483,
+    &quot;avg_ms&quot;: 4.596884889564817,
+    &quot;min_ms&quot;: 1.4340420020744205,
+    &quot;max_ms&quot;: 11.262792002526112,
+    &quot;p50_ms&quot;: 4.46795899188146,
+    &quot;p90_ms&quot;: 7.000500001595356,
+    &quot;p95_ms&quot;: 8.027541989577003,
+    &quot;p99_ms&quot;: 10.328549801488403,
+    &quot;error_pct&quot;: 0.0,
+    &quot;locust_rps&quot;: 22.700564289921477
+  },
+  &quot;endpoints&quot;: [
+    {
+      &quot;id&quot;: 35,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;auth_token&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;total&quot;: 3,
+      &quot;successful&quot;: 3,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 0.37159208135664334,
+      &quot;avg_ms&quot;: 3.2955280039459467,
+      &quot;min_ms&quot;: 2.212125007645227,
+      &quot;max_ms&quot;: 4.396792006446049,
+      &quot;p50_ms&quot;: 3.2776669977465644,
+      &quot;p90_ms&quot;: 4.172967004706152,
+      &quot;p95_ms&quot;: 4.2848795055761,
+      &quot;p99_ms&quot;: 4.374409506272059,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 36,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;create_transaction&quot;,
+      &quot;method&quot;: &quot;POST&quot;,
+      &quot;total&quot;: 11,
+      &quot;successful&quot;: 11,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 1.3625042983076923,
+      &quot;avg_ms&quot;: 4.775920542835427,
+      &quot;min_ms&quot;: 1.6928340046433732,
+      &quot;max_ms&quot;: 8.049458992900327,
+      &quot;p50_ms&quot;: 4.81150000996422,
+      &quot;p90_ms&quot;: 6.685749991447665,
+      &quot;p95_ms&quot;: 7.367604492173996,
+      &quot;p99_ms&quot;: 7.913088092755061,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 37,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;get_user&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;total&quot;: 19,
+      &quot;successful&quot;: 19,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 2.353416515258741,
+      &quot;avg_ms&quot;: 3.8124516837629736,
+      &quot;min_ms&quot;: 2.0267920044716448,
+      &quot;max_ms&quot;: 7.074124994687736,
+      &quot;p50_ms&quot;: 3.741416003322229,
+      &quot;p90_ms&quot;: 5.458233601530082,
+      &quot;p95_ms&quot;: 6.505662501149343,
+      &quot;p99_ms&quot;: 6.960432495980058,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 38,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;list_accounts&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;total&quot;: 27,
+      &quot;successful&quot;: 27,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 3.34432873220979,
+      &quot;avg_ms&quot;: 5.25318044431818,
+      &quot;min_ms&quot;: 1.571625005453825,
+      &quot;max_ms&quot;: 10.555917004239745,
+      &quot;p50_ms&quot;: 4.953875002684072,
+      &quot;p90_ms&quot;: 7.863516401266681,
+      &quot;p95_ms&quot;: 9.740620400407352,
+      &quot;p99_ms&quot;: 10.48202266334556,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 39,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;list_transactions&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;total&quot;: 50,
+      &quot;successful&quot;: 50,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 6.193201355944056,
+      &quot;avg_ms&quot;: 4.795726740558166,
+      &quot;min_ms&quot;: 1.636750006582588,
+      &quot;max_ms&quot;: 11.262792002526112,
+      &quot;p50_ms&quot;: 4.93187549727736,
+      &quot;p90_ms&quot;: 6.863954200525768,
+      &quot;p95_ms&quot;: 9.256168897263702,
+      &quot;p99_ms&quot;: 10.706335258873876,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 40,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;list_users&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;total&quot;: 51,
+      &quot;successful&quot;: 51,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 6.317065383062937,
+      &quot;avg_ms&quot;: 4.393504059122528,
+      &quot;min_ms&quot;: 1.4340420020744205,
+      &quot;max_ms&quot;: 8.801625008345582,
+      &quot;p50_ms&quot;: 4.352667005150579,
+      &quot;p90_ms&quot;: 7.000500001595356,
+      &quot;p95_ms&quot;: 7.302978992811404,
+      &quot;p99_ms&quot;: 8.414583498961292,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 41,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;name&quot;: &quot;search&quot;,
+      &quot;method&quot;: &quot;GET&quot;,
+      &quot;total&quot;: 20,
+      &quot;successful&quot;: 20,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 2.4772805423776223,
+      &quot;avg_ms&quot;: 4.574347849847982,
+      &quot;min_ms&quot;: 1.5473329985979944,
+      &quot;max_ms&quot;: 7.156749998102896,
+      &quot;p50_ms&quot;: 4.695250005170237,
+      &quot;p90_ms&quot;: 6.518112502817531,
+      &quot;p95_ms&quot;: 6.867356242582901,
+      &quot;p99_ms&quot;: 7.098871246998897,
+      &quot;error_pct&quot;: 0.0
+    }
+  ],
+  &quot;timeseries&quot;: [
+    {
+      &quot;id&quot;: 85,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540954.423451,
+      &quot;offset_seconds&quot;: 0.0,
+      &quot;total&quot;: 27,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 27.0,
+      &quot;avg_ms&quot;: 4.810203702719365,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 86,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540955.423451,
+      &quot;offset_seconds&quot;: 1.0,
+      &quot;total&quot;: 19,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 19.0,
+      &quot;avg_ms&quot;: 3.900267422738436,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 87,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540956.423451,
+      &quot;offset_seconds&quot;: 2.0,
+      &quot;total&quot;: 25,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 25.0,
+      &quot;avg_ms&quot;: 3.7188800395233557,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 88,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540957.423451,
+      &quot;offset_seconds&quot;: 3.0,
+      &quot;total&quot;: 22,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 22.0,
+      &quot;avg_ms&quot;: 3.421668636623177,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 89,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540958.423451,
+      &quot;offset_seconds&quot;: 4.0,
+      &quot;total&quot;: 21,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 21.0,
+      &quot;avg_ms&quot;: 5.784013858092727,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 90,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540959.423451,
+      &quot;offset_seconds&quot;: 5.0,
+      &quot;total&quot;: 25,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 25.0,
+      &quot;avg_ms&quot;: 4.713018321199343,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 91,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540960.423451,
+      &quot;offset_seconds&quot;: 6.0,
+      &quot;total&quot;: 22,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 22.0,
+      &quot;avg_ms&quot;: 5.236287861903706,
+      &quot;error_pct&quot;: 0.0
+    },
+    {
+      &quot;id&quot;: 92,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;bucket_start&quot;: 1795540961.423451,
+      &quot;offset_seconds&quot;: 7.0,
+      &quot;total&quot;: 20,
+      &quot;failed&quot;: 0,
+      &quot;rps&quot;: 20.0,
+      &quot;avg_ms&quot;: 5.265939550008625,
+      &quot;error_pct&quot;: 0.0
+    }
+  ],
+  &quot;error_categories&quot;: [],
+  &quot;thresholds&quot;: [
+    {
+      &quot;id&quot;: 33,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;metric&quot;: &quot;p95_ms&quot;,
+      &quot;operator&quot;: &quot;&lt;=&quot;,
+      &quot;limit_value&quot;: 1000.0,
+      &quot;actual_value&quot;: 8.027541989577003,
+      &quot;passed&quot;: 1,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;id&quot;: 34,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;metric&quot;: &quot;p99_ms&quot;,
+      &quot;operator&quot;: &quot;&lt;=&quot;,
+      &quot;limit_value&quot;: 2000.0,
+      &quot;actual_value&quot;: 10.328549801488403,
+      &quot;passed&quot;: 1,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;id&quot;: 35,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;metric&quot;: &quot;rps&quot;,
+      &quot;operator&quot;: &quot;&gt;=&quot;,
+      &quot;limit_value&quot;: 1.0,
+      &quot;actual_value&quot;: 22.419388908517483,
+      &quot;passed&quot;: 1,
+      &quot;reason&quot;: &quot;&quot;
+    },
+    {
+      &quot;id&quot;: 36,
+      &quot;run_id&quot;: &quot;9a3684c52e5b4973be36ae530a2370a6&quot;,
+      &quot;metric&quot;: &quot;error_pct&quot;,
+      &quot;operator&quot;: &quot;&lt;=&quot;,
+      &quot;limit_value&quot;: 2.0,
+      &quot;actual_value&quot;: 0.0,
+      &quot;passed&quot;: 1,
+      &quot;reason&quot;: &quot;&quot;
+    }
+  ],
+  &quot;notes&quot;: [
+    &quot;Response times are measured by Locust around each HTTP call.&quot;,
+    &quot;The demo API injects latency only when a request asks for it. Bundled profiles do not.&quot;,
+    &quot;Thresholds were taken from this run&#x27;s profile and are not global targets.&quot;
+  ]
+}</pre>
+</body>
+</html>

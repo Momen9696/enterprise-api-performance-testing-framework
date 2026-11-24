@@ -1,0 +1,517 @@
+[
+  {
+    "id": "ad1046e033764155abb4f63fc4641167",
+    "name": "baseline",
+    "test_type": "baseline",
+    "verdict": "PASS",
+    "duration_seconds": 8.062862157821655,
+    "started_at": "2026-11-24T17:21:08+00:00",
+    "total": 25,
+    "successful": 25,
+    "failed": 0,
+    "rps": 3.100635916955109,
+    "avg_ms": 5.5628566787345335,
+    "min_ms": 1.2618749897228554,
+    "max_ms": 8.101500003249384,
+    "p50_ms": 5.82570799451787,
+    "p90_ms": 7.138425405719318,
+    "p95_ms": 7.507358191651292,
+    "p99_ms": 7.966939919278956,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 800.0,
+        "actual_value": 7.507358191651292,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 1500.0,
+        "actual_value": 7.966939919278956,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 0.5,
+        "actual_value": 3.100635916955109,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 1.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "27a35feff80c4770916df75bcd0b2ca5",
+    "name": "load",
+    "test_type": "load",
+    "verdict": "PASS",
+    "duration_seconds": 10.042995929718018,
+    "started_at": "2026-11-24T17:21:17+00:00",
+    "total": 384,
+    "successful": 384,
+    "failed": 0,
+    "rps": 38.235602472337334,
+    "avg_ms": 4.469822078514578,
+    "min_ms": 1.0651250049704686,
+    "max_ms": 26.624749996699393,
+    "p50_ms": 4.254082996340003,
+    "p90_ms": 6.754804405500181,
+    "p95_ms": 7.737174997600956,
+    "p99_ms": 10.364464143640372,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1000.0,
+        "actual_value": 7.737174997600956,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2000.0,
+        "actual_value": 10.364464143640372,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 2.0,
+        "actual_value": 38.235602472337334,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 2.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "d785fa87d9f74590846b4eabef5ae67a",
+    "name": "stress",
+    "test_type": "stress",
+    "verdict": "PASS",
+    "duration_seconds": 12.052086114883423,
+    "started_at": "2026-11-24T17:21:28+00:00",
+    "total": 582,
+    "successful": 582,
+    "failed": 0,
+    "rps": 48.29039507785077,
+    "avg_ms": 2.9820776253723045,
+    "min_ms": 0.8629999938420951,
+    "max_ms": 22.414000006392598,
+    "p50_ms": 2.1846250019734725,
+    "p90_ms": 5.548103897308464,
+    "p95_ms": 7.305728861683742,
+    "p99_ms": 12.544721522717627,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1500.0,
+        "actual_value": 7.305728861683742,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2500.0,
+        "actual_value": 12.544721522717627,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 48.29039507785077,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 5.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "5d92d901a0e143b7af4c4f70b33ae0cb",
+    "name": "spike",
+    "test_type": "spike",
+    "verdict": "PASS",
+    "duration_seconds": 9.045662879943848,
+    "started_at": "2026-11-24T17:21:41+00:00",
+    "total": 570,
+    "successful": 570,
+    "failed": 0,
+    "rps": 63.013624050019686,
+    "avg_ms": 3.2477044102147614,
+    "min_ms": 0.8682500047143549,
+    "max_ms": 21.882999993977137,
+    "p50_ms": 2.6394789965706877,
+    "p90_ms": 5.692620202898979,
+    "p95_ms": 7.0702874989365165,
+    "p99_ms": 11.2478630866098,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1500.0,
+        "actual_value": 7.0702874989365165,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2500.0,
+        "actual_value": 11.2478630866098,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 63.013624050019686,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 5.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "770488e6f84f49f7809486367aac8373",
+    "name": "soak",
+    "test_type": "soak",
+    "verdict": "PASS",
+    "duration_seconds": 15.093263864517212,
+    "started_at": "2026-11-24T17:21:51+00:00",
+    "total": 221,
+    "successful": 221,
+    "failed": 0,
+    "rps": 14.642293541263093,
+    "avg_ms": 5.002428913553249,
+    "min_ms": 1.2971249961992726,
+    "max_ms": 11.370082997018471,
+    "p50_ms": 5.094666994409636,
+    "p90_ms": 7.018415999482386,
+    "p95_ms": 8.073042001342401,
+    "p99_ms": 10.370716001489209,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1000.0,
+        "actual_value": 8.073042001342401,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2000.0,
+        "actual_value": 10.370716001489209,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 14.642293541263093,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 2.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "564863f5985a43fdac13b812f2241931",
+    "name": "concurrent",
+    "test_type": "concurrent",
+    "verdict": "PASS",
+    "duration_seconds": 8.030327081680298,
+    "started_at": "2026-11-24T17:22:07+00:00",
+    "total": 2315,
+    "successful": 2315,
+    "failed": 0,
+    "rps": 288.2821554406225,
+    "avg_ms": 2.1926129334060613,
+    "min_ms": 0.8117499965010211,
+    "max_ms": 17.26629199401941,
+    "p50_ms": 1.8645829986780882,
+    "p90_ms": 3.3184747997438535,
+    "p95_ms": 4.21895000617951,
+    "p99_ms": 6.779314383747999,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1500.0,
+        "actual_value": 4.21895000617951,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2500.0,
+        "actual_value": 6.779314383747999,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 2.0,
+        "actual_value": 288.2821554406225,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 3.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "e71528e08e464f20b029c7e09c5c638b",
+    "name": "endpoint-transactions",
+    "test_type": "endpoint",
+    "verdict": "PASS",
+    "duration_seconds": 8.059499025344849,
+    "started_at": "2026-11-24T17:22:16+00:00",
+    "total": 306,
+    "successful": 306,
+    "failed": 0,
+    "rps": 37.96762044858079,
+    "avg_ms": 4.346534722310405,
+    "min_ms": 0.9712080063764006,
+    "max_ms": 29.45570800511632,
+    "p50_ms": 3.9021040065563284,
+    "p90_ms": 6.898520499817096,
+    "p95_ms": 7.767509992845589,
+    "p99_ms": 16.929983644513324,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 800.0,
+        "actual_value": 7.767509992845589,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 1500.0,
+        "actual_value": 16.929983644513324,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 37.96762044858079,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 1.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "feb46aabfc9643389f84a59e5b4ab117",
+    "name": "ci-smoke",
+    "test_type": "load",
+    "verdict": "PASS",
+    "duration_seconds": 8.05498194694519,
+    "started_at": "2026-11-24T17:22:25+00:00",
+    "total": 185,
+    "successful": 185,
+    "failed": 0,
+    "rps": 22.96715265391256,
+    "avg_ms": 5.0106432270006955,
+    "min_ms": 1.0048749973066151,
+    "max_ms": 52.45145800290629,
+    "p50_ms": 4.961750004440546,
+    "p90_ms": 7.270825002342461,
+    "p95_ms": 8.249308599624781,
+    "p99_ms": 9.648572715232143,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1000.0,
+        "actual_value": 8.249308599624781,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2000.0,
+        "actual_value": 9.648572715232143,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 22.96715265391256,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 2.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "9a3684c52e5b4973be36ae530a2370a6",
+    "name": "ci-smoke",
+    "test_type": "load",
+    "verdict": "PASS",
+    "duration_seconds": 8.073369026184082,
+    "started_at": "2026-11-24T17:22:34+00:00",
+    "total": 181,
+    "successful": 181,
+    "failed": 0,
+    "rps": 22.419388908517483,
+    "avg_ms": 4.596884889564817,
+    "min_ms": 1.4340420020744205,
+    "max_ms": 11.262792002526112,
+    "p50_ms": 4.46795899188146,
+    "p90_ms": 7.000500001595356,
+    "p95_ms": 8.027541989577003,
+    "p99_ms": 10.328549801488403,
+    "error_pct": 0.0,
+    "categories": [],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1000.0,
+        "actual_value": 8.027541989577003,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2000.0,
+        "actual_value": 10.328549801488403,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 1.0,
+        "actual_value": 22.419388908517483,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 2.0,
+        "actual_value": 0.0,
+        "passed": 1
+      }
+    ]
+  },
+  {
+    "id": "7bda60512d7140af89a3fc6770493fd3",
+    "name": "threshold-fail-demo",
+    "test_type": "load",
+    "verdict": "FAIL",
+    "duration_seconds": 6.080904006958008,
+    "started_at": "2026-11-24T17:22:42+00:00",
+    "total": 142,
+    "successful": 2,
+    "failed": 140,
+    "rps": 23.351791088548357,
+    "avg_ms": 4.263889704995729,
+    "min_ms": 1.5792089980095625,
+    "max_ms": 9.4646659999853,
+    "p50_ms": 4.275666491594166,
+    "p90_ms": 6.356295493606013,
+    "p95_ms": 7.263172600505638,
+    "p99_ms": 8.801904772844868,
+    "error_pct": 98.59154929577466,
+    "categories": [
+      {
+        "category": "http_5xx",
+        "count": 140
+      }
+    ],
+    "checks": [
+      {
+        "metric": "p95_ms",
+        "operator": "<=",
+        "limit_value": 1000.0,
+        "actual_value": 7.263172600505638,
+        "passed": 1
+      },
+      {
+        "metric": "p99_ms",
+        "operator": "<=",
+        "limit_value": 2000.0,
+        "actual_value": 8.801904772844868,
+        "passed": 1
+      },
+      {
+        "metric": "rps",
+        "operator": ">=",
+        "limit_value": 0.5,
+        "actual_value": 23.351791088548357,
+        "passed": 1
+      },
+      {
+        "metric": "error_pct",
+        "operator": "<=",
+        "limit_value": 5.0,
+        "actual_value": 98.59154929577466,
+        "passed": 0
+      }
+    ]
+  }
+]
