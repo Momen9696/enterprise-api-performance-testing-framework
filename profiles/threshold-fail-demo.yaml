@@ -1,0 +1,29 @@
+name: threshold-fail-demo
+test_type: load
+base_url: http://127.0.0.1:8090
+users: 2
+spawn_rate: 2
+duration_seconds: 6
+request_timeout_seconds: 5
+tags: [threshold, expected-fail]
+wait:
+  min_seconds: 0.05
+  max_seconds: 0.1
+auth:
+  mode: bearer
+  login_path: /auth/token
+  username: demo
+  password_env: DEMO_API_PASSWORD
+thresholds:
+  max_p95_ms: 1000
+  max_p99_ms: 2000
+  min_rps: 0.5
+  max_error_pct: 5
+endpoints:
+  - name: forced_fault
+    method: GET
+    path: /demo/fault
+    weight: 1
+    query:
+      status: "500"
+    expected_status: [200]

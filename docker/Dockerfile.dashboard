@@ -1,0 +1,29 @@
+# Dashboard image. The UI is served by the control plane at /.
+# Compose runs a single control-plane container so SQLite has one writer.
+# Use this Dockerfile when the dashboard is deployed under its own image name.
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app/src \
+    PERF_DB=/data/perfkit.sqlite \
+    PERF_REPORTS_DIR=/data/reports \
+    PERF_ALLOWED_HOSTS=demo-api,localhost,127.0.0.1,::1,host.docker.internal \
+    PERF_TARGET_URL=http://demo-api:8090 \
+    DEMO_API_USERNAME=demo \
+    DEMO_API_PASSWORD=demo-local-only
+
+WORKDIR /app
+RUN useradd --create-home --uid 10001 perfkit \
+    && pip install --no-cache-dir --upgrade pip
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY src ./src
+COPY profiles ./profiles
+RUN mkdir -p /data/reports && chown -R perfkit:perfkit /app /data
+VOLUME /data
+USER perfkit
+EXPOSE 8080
+HEALTHCHECK --interval=10s --timeout=3s --start-period=15s --retries=5 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"
+CMD ["python", "-m", "uvicorn", "perfkit.api.app:app", "--host", "0.0.0.0", "--port", "8080"]

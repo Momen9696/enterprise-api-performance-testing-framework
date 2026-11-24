@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PerfKit</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #5c6b62;
+      --line: #d7e0da;
+      --paper: #f4f7f5;
+      --card: #ffffff;
+      --accent: #0f6e4c;
+      --accent-soft: #e5f4ec;
+      --fail: #8d1d18;
+      --fail-soft: #fde8e6;
+      --warn: #8a5a10;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-end;
+      padding: 1.25rem 1.5rem;
+      background: #10241c;
+      color: #f4f7f5;
+    }
+    header h1 { margin: 0; font-size: 1.4rem; letter-spacing: 0.01em; }
+    header p { margin: 0.25rem 0 0; color: #c5d5cc; font-size: 0.92rem; }
+    main { padding: 1.25rem; max-width: 1200px; margin: 0 auto; }
+    .toolbar, .kpis, .grid { display: grid; gap: 0.75rem; }
+    .toolbar { grid-template-columns: 1fr auto auto; align-items: end; margin-bottom: 1rem; }
+    label { display: block; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.25rem; }
+    select, button {
+      font: inherit;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      padding: 0.55rem 0.7rem;
+      background: white;
+    }
+    button {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      cursor: pointer;
+    }
+    button.secondary { background: white; color: var(--ink); }
+    .kpis { grid-template-columns: repeat(6, 1fr); margin-bottom: 1rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+    }
+    .card span { display: block; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .card strong { display: block; margin-top: 0.3rem; font-size: 1.25rem; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .span-2 { grid-column: span 2; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.45rem 0.35rem; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+    .badge { display: inline-block; padding: 0.1rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+    .PASS { background: var(--accent-soft); color: var(--accent); }
+    .FAIL { background: var(--fail-soft); color: var(--fail); }
+    .NOT_EVALUATED, .ERROR, .running, .ingesting, .queued { background: #eee; color: #333; }
+    .note { color: var(--muted); font-size: 0.9rem; }
+    .chart { min-height: 360px; }
+    #status { min-height: 1.2rem; margin: 0.4rem 0 0; }
+    @media (max-width: 900px) {
+      .toolbar, .kpis, .grid { grid-template-columns: 1fr; }
+      .span-2 { grid-column: auto; }
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>PerfKit</h1>
+      <p>Measured API performance. Charts read stored executions only.</p>
+    </div>
+    <div id="active">No active run</div>
+  </header>
+  <main>
+    <form class="toolbar" id="launch">
+      <div>
+        <label for="profile">Profile</label>
+        <select id="profile" name="profile"></select>
+      </div>
+      <button type="submit">Run profile</button>
+      <button type="button" class="secondary" id="refresh">Refresh</button>
+    </form>
+    <p id="status" class="note"></p>
+    <section class="kpis" id="kpis"></section>
+    <section class="grid">
+      <article class="card span-2">
+        <h2>Execution history</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>When</th><th>Profile</th><th>Type</th><th>Status</th><th>Verdict</th>
+              <th>Requests</th><th>RPS</th><th>P95 ms</th><th>Error %</th>
+            </tr>
+          </thead>
+          <tbody id="history"></tbody>
+        </table>
+      </article>
+      <article class="card"><h2>Throughput</h2><div id="throughput" class="chart"></div></article>
+      <article class="card"><h2>Error rate</h2><div id="errors" class="chart"></div></article>
+      <article class="card"><h2>Response-time distribution</h2><div id="distribution" class="chart"></div></article>
+      <article class="card"><h2>Endpoint comparison</h2><div id="endpoints" class="chart"></div></article>
+      <article class="card span-2">
+        <h2>Thresholds</h2>
+        <table>
+          <thead><tr><th>Metric</th><th>Operator</th><th>Limit</th><th>Actual</th><th>Result</th></tr></thead>
+          <tbody id="checks"></tbody>
+        </table>
+      </article>
+      <article class="card span-2">
+        <h2>Endpoint table</h2>
+        <table>
+          <thead>
+            <tr><th>Method</th><th>Name</th><th>Total</th><th>Failed</th><th>RPS</th><th>Avg</th><th>P50</th><th>P95</th><th>P99</th><th>Error %</th></tr>
+          </thead>
+          <tbody id="endpoint-rows"></tbody>
+        </table>
+      </article>
+      <article class="card span-2">
+        <h2>Trend for this profile</h2>
+        <p id="trend-text" class="note"></p>
+        <div id="trend" class="chart"></div>
+      </article>
+    </section>
+  </main>
+  <script>
+    const state = { selected: null };
+    const num = (value, digits = 2) => value === null || value === undefined ? "—" : Number(value).toFixed(digits);
+    const badge = (value) => `<span class="badge ${value || ""}">${value || "—"}</span>`;
+
+    function setStatus(text) { document.getElementById("status").textContent = text; }
+
+    async function loadProfiles() {
+      const response = await fetch("/api/profiles");
+      const payload = await response.json();
+      const select = document.getElementById("profile");
+      select.innerHTML = "";
+      for (const item of payload.profiles) {
+        const option = document.createElement("option");
+        option.value = item.file;
+        option.textContent = item.error ? `${item.file} (${item.error})` : `${item.file} · ${item.test_type} · ${item.users} users · ${item.duration_seconds}s`;
+        option.disabled = Boolean(item.error);
+        select.appendChild(option);
+      }
+    }
+
+    async function loadHistory() {
+      const response = await fetch("/api/runs?limit=30");
+      const payload = await response.json();
+      const body = document.getElementById("history");
+      body.innerHTML = "";
+      if (!payload.runs.length) {
+        body.innerHTML = `<tr><td colspan="9">No executions yet. Run a profile to populate this dashboard with measured results.</td></tr>`;
+        return;
+      }
+      for (const run of payload.runs) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${run.started_at || run.created_at || ""}</td>
+          <td><button type="button" class="secondary" data-id="${run.id}">${run.name}</button></td>
+          <td>${run.test_type}</td>
+          <td>${badge(run.status)}</td>
+          <td>${badge(run.verdict)}</td>
+          <td>${run.total ?? "—"}</td>
+          <td>${num(run.rps)}</td>
+          <td>${num(run.p95_ms)}</td>
+          <td>${num(run.error_pct)}</td>`;
+        tr.querySelector("button").addEventListener("click", () => selectRun(run.id));
+        body.appendChild(tr);
+      }
+      if (!state.selected) selectRun(payload.runs[0].id);
+    }
+
+    function fillKpis(run) {
+      const metrics = run.metrics || {};
+      const items = [
+        ["Requests", metrics.total],
+        ["Success", metrics.successful],
+        ["Failed", metrics.failed],
+        ["RPS", num(metrics.rps)],
+        ["P95 ms", num(metrics.p95_ms)],
+        ["Error %", num(metrics.error_pct)],
+      ];
+      document.getElementById("kpis").innerHTML = items.map(([label, value]) =>
+        `<article class="card"><span>${label}</span><strong>${value ?? "—"}</strong></article>`
+      ).join("");
+    }
+
+    function fillTables(run) {
+      const checks = document.getElementById("checks");
+      checks.innerHTML = (run.thresholds || []).map((row) =>
+        `<tr><td>${row.metric}</td><td>${row.operator}</td><td>${num(row.limit_value)}</td><td>${num(row.actual_value)}</td><td>${badge(row.passed ? "PASS" : "FAIL")}</td></tr>`
+      ).join("") || `<tr><td colspan="5">No thresholds configured on this profile.</td></tr>`;
+      const rows = document.getElementById("endpoint-rows");
+      rows.innerHTML = (run.endpoints || []).map((row) =>
+        `<tr><td>${row.method}</td><td>${row.name}</td><td>${row.total}</td><td>${row.failed}</td><td>${num(row.rps)}</td><td>${num(row.avg_ms)}</td><td>${num(row.p50_ms)}</td><td>${num(row.p95_ms)}</td><td>${num(row.p99_ms)}</td><td>${num(row.error_pct)}</td></tr>`
+      ).join("") || `<tr><td colspan="10">No endpoint samples stored.</td></tr>`;
+    }
+
+    function draw(id, figure) {
+      const node = document.getElementById(id);
+      if (!figure || !window.Plotly) {
+        node.textContent = window.Plotly ? "No samples for this chart." : "Plotly could not be loaded. Tables above still show the measured numbers.";
+        return;
+      }
+      Plotly.react(id, figure.data || [], figure.layout || {}, {responsive: true, displaylogo: false});
+    }
+
+    async function selectRun(id) {
+      state.selected = id;
+      const run = await (await fetch(`/api/runs/${id}`)).json();
+      fillKpis(run);
+      fillTables(run);
+      setStatus(`${run.name} · ${run.test_type} · ${run.status} · verdict ${run.verdict || "—"} · ${run.base_url}`);
+      if (run.status === "completed") {
+        const charts = await (await fetch(`/api/runs/${id}/charts`)).json();
+        draw("throughput", charts.throughput);
+        draw("errors", charts.errors);
+        draw("distribution", charts.distribution);
+        draw("endpoints", charts.endpoints);
+        const trend = await (await fetch(`/api/trends?name=${encodeURIComponent(run.name)}`)).json();
+        const analysis = trend.analysis || {};
+        if (analysis.status === "ok") {
+          document.getElementById("trend-text").textContent =
+            `P95 ${analysis.p95_ms.direction}, throughput ${analysis.rps.direction}, error rate ${analysis.error_pct.direction}.`;
+          draw("trend", trend.chart);
+        } else {
+          document.getElementById("trend-text").textContent = "At least two completed runs of this profile are required for a trend.";
+          draw("trend", null);
+        }
+      } else {
+        ["throughput", "errors", "distribution", "endpoints", "trend"].forEach((name) => draw(name, null));
+      }
+    }
+
+    async function refreshActive() {
+      const payload = await (await fetch("/api/runs/active")).json();
+      const node = document.getElementById("active");
+      if (!payload.active) {
+        node.textContent = "No active run";
+        return;
+      }
+      node.textContent = `Active: ${payload.active.name} (${payload.active.status})`;
+      if (state.selected === payload.active.id) selectRun(payload.active.id);
+    }
+
+    document.getElementById("launch").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const profile = document.getElementById("profile").value;
+      setStatus(`Starting ${profile}`);
+      const response = await fetch("/api/runs", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({profile_name: profile}),
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        setStatus(payload.detail || "Run rejected");
+        return;
+      }
+      state.selected = payload.id;
+      setStatus(`Run ${payload.id} started`);
+      await loadHistory();
+    });
+    document.getElementById("refresh").addEventListener("click", loadHistory);
+    loadProfiles().then(loadHistory).then(refreshActive);
+    setInterval(refreshActive, 2000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+[project]
+name = "perfkit"
+version = "1.0.0"
+description = "Enterprise API performance testing framework with Locust, a local demo API, and measured reports"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.165.0",
+  "uvicorn==0.54.0",
+  "pydantic==2.14.4",
+  "pandas==3.1.1",
+  "plotly==7.1.0",
+  "locust==2.47.0",
+  "PyYAML==6.0.4",
+  "httpx==0.28.1",
+]
+
+[project.scripts]
+perfkit = "perfkit.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+  "live: runs Locust against the local demo API",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]
+# B104: the demo and control plane may bind 0.0.0.0 inside Docker.
+# Load targets are allowlisted separately and cannot be public hosts.
+skips = ["B101", "B104"]

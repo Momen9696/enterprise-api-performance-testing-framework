@@ -1,0 +1,29 @@
+name: endpoint-transactions
+test_type: endpoint
+base_url: http://127.0.0.1:8090
+users: 4
+spawn_rate: 4
+duration_seconds: 8
+request_timeout_seconds: 5
+tags: [endpoint]
+wait:
+  min_seconds: 0.05
+  max_seconds: 0.15
+auth:
+  mode: bearer
+  login_path: /auth/token
+  username: demo
+  password_env: DEMO_API_PASSWORD
+thresholds:
+  max_p95_ms: 800
+  max_p99_ms: 1500
+  min_rps: 1
+  max_error_pct: 1
+endpoints:
+  - name: list_transactions
+    method: GET
+    path: /transactions
+    weight: 1
+    query:
+      page: "1"
+      page_size: "10"

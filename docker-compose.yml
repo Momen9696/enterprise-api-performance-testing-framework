@@ -1,0 +1,47 @@
+services:
+  demo-api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.demo
+    environment:
+      DEMO_API_USERNAME: demo
+      DEMO_API_PASSWORD: demo-local-only
+      DEMO_TOKEN_SECRET: demo-token-secret-local
+    ports:
+      - "8090:8090"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  engine:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.engine
+    environment:
+      PERF_DB: /data/perfkit.sqlite
+      PERF_REPORTS_DIR: /data/reports
+      PERF_TARGET_URL: http://demo-api:8090
+      PERF_ALLOWED_HOSTS: demo-api,localhost,127.0.0.1,::1,host.docker.internal
+      DEMO_API_USERNAME: demo
+      DEMO_API_PASSWORD: demo-local-only
+      PERF_MAX_USERS: "25"
+      PERF_MAX_DURATION_SECONDS: "180"
+    ports:
+      - "8080:8080"
+    volumes:
+      - perfkit-data:/data
+    depends_on:
+      demo-api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  perfkit-data:

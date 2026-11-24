@@ -1,0 +1,52 @@
+name: stress
+test_type: stress
+base_url: http://127.0.0.1:8090
+users: 8
+spawn_rate: 4
+duration_seconds: 12
+request_timeout_seconds: 5
+tags: [stress]
+wait:
+  min_seconds: 0.05
+  max_seconds: 0.15
+auth:
+  mode: bearer
+  login_path: /auth/token
+  username: demo
+  password_env: DEMO_API_PASSWORD
+thresholds:
+  max_p95_ms: 1500
+  max_p99_ms: 2500
+  min_rps: 1
+  max_error_pct: 5
+stages:
+  - duration_seconds: 3
+    users: 2
+    spawn_rate: 2
+  - duration_seconds: 3
+    users: 4
+    spawn_rate: 2
+  - duration_seconds: 3
+    users: 6
+    spawn_rate: 3
+  - duration_seconds: 3
+    users: 8
+    spawn_rate: 4
+endpoints:
+  - name: list_users
+    method: GET
+    path: /users
+    weight: 2
+  - name: list_transactions
+    method: GET
+    path: /transactions
+    weight: 3
+    query:
+      page: "1"
+      page_size: "20"
+  - name: search
+    method: GET
+    path: /search
+    weight: 1
+    query:
+      q: avery

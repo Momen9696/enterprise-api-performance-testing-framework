@@ -1,0 +1,47 @@
+name: spike
+test_type: spike
+base_url: http://127.0.0.1:8090
+users: 8
+spawn_rate: 8
+duration_seconds: 9
+request_timeout_seconds: 5
+tags: [spike]
+wait:
+  min_seconds: 0.05
+  max_seconds: 0.1
+auth:
+  mode: bearer
+  login_path: /auth/token
+  username: demo
+  password_env: DEMO_API_PASSWORD
+thresholds:
+  max_p95_ms: 1500
+  max_p99_ms: 2500
+  min_rps: 1
+  max_error_pct: 5
+stages:
+  - duration_seconds: 3
+    users: 1
+    spawn_rate: 1
+  - duration_seconds: 3
+    users: 8
+    spawn_rate: 8
+  - duration_seconds: 3
+    users: 1
+    spawn_rate: 1
+endpoints:
+  - name: list_accounts
+    method: GET
+    path: /accounts
+    weight: 2
+  - name: get_user
+    method: GET
+    path: /users/usr-1002
+    weight: 1
+  - name: list_transactions
+    method: GET
+    path: /transactions
+    weight: 2
+    query:
+      page: "1"
+      page_size: "10"

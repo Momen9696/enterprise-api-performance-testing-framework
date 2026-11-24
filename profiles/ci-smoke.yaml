@@ -1,0 +1,58 @@
+name: ci-smoke
+test_type: load
+base_url: http://127.0.0.1:8090
+users: 3
+spawn_rate: 3
+duration_seconds: 8
+request_timeout_seconds: 5
+tags: [ci, smoke]
+wait:
+  min_seconds: 0.05
+  max_seconds: 0.2
+auth:
+  mode: bearer
+  login_path: /auth/token
+  username: demo
+  password_env: DEMO_API_PASSWORD
+thresholds:
+  max_p95_ms: 1000
+  max_p99_ms: 2000
+  min_rps: 1
+  max_error_pct: 2
+endpoints:
+  - name: list_users
+    method: GET
+    path: /users
+    weight: 3
+  - name: get_user
+    method: GET
+    path: /users/usr-1001
+    weight: 1
+  - name: list_accounts
+    method: GET
+    path: /accounts
+    weight: 2
+  - name: list_transactions
+    method: GET
+    path: /transactions
+    weight: 3
+    query:
+      page: "1"
+      page_size: "10"
+  - name: search
+    method: GET
+    path: /search
+    weight: 1
+    query:
+      q: quinn
+  - name: create_transaction
+    method: POST
+    path: /transactions
+    weight: 1
+    expected_status: [201]
+    headers:
+      X-Perfkit-Scenario: ci-smoke
+    json_body:
+      account_id: "acct-{{choice:1001,1002,1003}}"
+      amount: "{{int:1,5}}"
+      description: "synthetic-{{uuid}}"
